@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from jose import jwt
 from passlib.context import CryptContext
-from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -11,14 +10,21 @@ from app.db.session import get_db
 from app.models.user import User
 from app.core.config import SECRET_KEY, ALGORITHM
 
+# ================================== #
+# obsługa zabezpieczeń i autoryzacji #
+# ================================== #
+
 pwd_context = CryptContext(schemes=["bcrypt"])
 
+# ========== hashowanie hasła ========== # -- nie wiem czy jest używane
 def hash_password(password):
     return pwd_context.hash(password)
 
+# ========== weryfikacja hasła ========== # -- nie wiem czy jest używane
 def verify_password(password, hashed):
     return pwd_context.verify(password, hashed)
 
+# ========== stworzenie tokenu zalogowanego użytkownika ========== #
 def create_token(user_id: int):
     payload = {
         "sub": str(user_id),
