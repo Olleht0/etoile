@@ -97,7 +97,13 @@ function App() {
 			setError("");
 
 			const res = await fetch("http://localhost:8000/cart/", {
-				headers: { token },
+				headers: {
+					"Content-Type": "application/json",
+					Token: localStorage.getItem("token"),
+					"Access-Control-Allow-Origin": "",
+					"Access-Control-Allow-Methods": "",
+					"Access-Control-Allow-Headers": "*",
+				},
 			});
 
 			const data = await res.json();
@@ -131,6 +137,9 @@ function App() {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify({
 				cart_item_id: id,
@@ -150,6 +159,9 @@ function App() {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify({
 				cart_item_id: id,
@@ -170,6 +182,9 @@ function App() {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
+						"Access-Control-Allow-Origin": "",
+						"Access-Control-Allow-Methods": "",
+						"Access-Control-Allow-Headers": "*",
 					},
 					body: JSON.stringify({
 						cart_item_id: item.id,
@@ -195,8 +210,11 @@ function App() {
 		const res = await fetch("http://localhost:8000/cart/", {
 			method: "POST",
 			headers: {
-				token,
+				Token: localStorage.getItem("token"),
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify(payload),
 		});
